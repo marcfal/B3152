@@ -1,0 +1,22 @@
+B3152	FALLOUH Marc	KANCEL Justin
+
+Erreurs :
+Champ email manquant dans <infos>
+Correction date et binome
+
+Xpath :
+1    Les auteurs de la mise en forme :
+//mise_en_forme_par/auteur
+2    Les paragraphes de narration
+//paragr[@type='narration']
+3    Les phrases en français
+//phrase[@langue='fr']
+4    La troisième phrase de chaque paragraphe
+//paragr/phrase[3]
+5    La neuvième phrase du texte (pensez à utiliser les parenthèses)
+(//phrase)[9]
+6    Les phrases commençant par "Je"
+//phrase[starts-with(text(), 'Je')]
+7    Listez les types des paragraphes du texte (sans doublons)
+distinct-values(//paragr/@type)											/*xpath 2.0*/
+//paragr[not(@type= preceding::paragr/@type)]/@type						/*xpath 1.0*/
