@@ -5,6 +5,26 @@
 
 void print_prime_factors(uint64_t n)
 {
+	uint64_t i;
+	i = 2;
+	while(n>1)
+	{
+		if(n%i == 0)
+		{
+			n = n / i;
+			printf("%ju ", i);
+		}
+		else
+		{
+			i++;
+		}
+	}
+	printf("\n");
+}
+
+/*
+void print_prime_factors_bis(uint64_t n)
+{
 	int taille;
 	int i;
 	uint64_t cur;
@@ -13,7 +33,7 @@ void print_prime_factors(uint64_t n)
 	tab[0] = (uint64_t)1;
     taille = prime_list(n, tab);
     
-    for(i=0; i< taille && (cur=tab[i])<=n; i++)
+    for(i=1; i< taille && (cur=tab[i])<=n; i++)
     {
 		if(n%cur == 0)
 		{
@@ -24,6 +44,7 @@ void print_prime_factors(uint64_t n)
 	}
 	
 	free(tab);
+	printf("\n");
     return;
 
 
@@ -75,6 +96,7 @@ int prime_list(uint64_t n, uint64_t *tab)
 	
 	return taille_tab;
 }
+*/
 
 int main(void)
 {
