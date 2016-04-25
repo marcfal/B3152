@@ -18,9 +18,52 @@
 		<body style="background-color:white;" >
 			<xsl:apply-templates></xsl:apply-templates>
 			
+<h3>
+
+				Fin du texte.
+
+			</h3>
+
+			<hr/>
 		</body>
 	</html>
 	</xsl:template>
+	
+	<xsl:template match="lien"/>
+	
+	
+<xsl:template match="entete">
+	
+	<table cellspacing="50"  align="center" >
+	
+		<tbody>
+	
+			<tr>
+	
+				<td>
+	
+					<img src="images/prince.png" />
+	
+				</td>
+	
+				<td>
+	
+					<xsl:apply-templates/>
+	
+				</td>
+	
+			</tr>
+	
+		</tbody>
+	
+	</table>
+	
+	<hr/>
+		<h3>
+			Début du texte:
+		</h3>
+	
+</xsl:template>
 	
 	<xsl:template match="titre">
 		<h1 style="text-align:center; color:blue;">
@@ -29,11 +72,9 @@
 	</xsl:template>
 	
 	<xsl:template match="infos/auteur">
-		<br/>
 		<h2 style="text-align:center; font-style:italic;">
 			<xsl:apply-templates/>
 		</h2>
-		<br/>
 	</xsl:template>
 	
 	<xsl:template match="infos" name="infos">
@@ -60,7 +101,6 @@
 			<br/>
 			<xsl:text>Email du responsable : </xsl:text>
 			<xsl:value-of select="//email"/>
-			<hr/>
 		</blockquote>
 	</xsl:template>
 	
@@ -94,11 +134,11 @@
 	</xsl:template>
 	
 	<xsl:template match="paragr[@type='dialogue']">
-		<table style="width:90%; align : center;">
+		<table width="90%" align="center">
 			<tbody>
 				<tr>
-					<td style="width : 45%" >
-						<table style="width:100%; cellpadding:10; border:1;" >
+					<td width = "45%" >
+						<table width="100%" cellpadding="10" border="1" >
 							<tbody>
 								<xsl:apply-templates select="descendant-or-self::phrase[@langue='fr']"/>
 							</tbody>
@@ -106,8 +146,8 @@
 					</td>
 					<td>
 					</td>
-					<td style="width : 45%" >
-						<table style="width:100%; cellpadding:10; border:1;" >
+					<td width ="45%" >
+						<table width="100%" cellpadding="10" border="1" >
 							<tbody>
 								<xsl:apply-templates select="descendant-or-self::phrase[@langue='hu']"/>
 							</tbody>
@@ -122,12 +162,13 @@
 	
 	<xsl:template match="paragr[@type='dialogue']/phrase[@langue='fr']">
 		<tr>
-			<td style="width:50%;" >
+			<td width="50" >
 				
+ <img src="images/{@locuteur}.png"/>
 			</td>
 			
 			<td>
-				<span style="font-size:24; font-weight:bold;" >
+				<span >
 					<xsl:apply-templates/>
 				</span>
 			
@@ -136,10 +177,31 @@
 		
 	</xsl:template>
 	
+	<xsl:template match="paragr[@type='dialogue']/phrase[@langue='fr' and contains(., 'mouton')]">
+		<tr>
+			<td width="50" >
+				
+ <img src="images/{@locuteur}.png"/>
+			</td>
+			
+			<td>
+				<span style="font-size:24; font-weight:bold;" >
+					<xsl:apply-templates/>
+					<img src="images/moutonDessin.png"/>
+				</span>
+			
+			</td>
+		</tr>
+		
+	</xsl:template>
+	
+	
 	<xsl:template match="paragr[@type='dialogue']/phrase[@langue='hu']">
 		<tr>
-			<td style="width:50%;" >
+			<td width="50" >
 				
+
+ <img src="images/{@locuteur}.png"/>
 			</td>
 			
 			<td>
@@ -149,11 +211,10 @@
 			
 			</td>
 		</tr>
-		<xsl:apply-templates/>
 	</xsl:template>
+	
+	
 
-	
-	
 
 </xsl:stylesheet>
 

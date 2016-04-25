@@ -1,5 +1,7 @@
 B3152	FALLOUH Marc	KANCEL Justin
 
+----------------------------------------------1----------------------------------------------------
+
 Erreurs :
 Champ email manquant dans <infos>
 Correction date et binome
@@ -20,3 +22,87 @@ Xpath :
 7    Listez les types des paragraphes du texte (sans doublons)
 distinct-values(//paragr/@type)											/*xpath 2.0*/
 //paragr[not(@type= preceding::paragr/@type)]/@type						/*xpath 1.0*/
+
+
+
+---------------------------------------------2----------------------------------------------------
+1.
+<phrases>{
+for $p in //phrase[@langue='fr']
+order by $p
+return $p
+}</phrases> 
+
+2.
+<moutons>{
+for $p in //phrase[@langue='fr']
+where contains($p, 'mouton')
+return $p
+}</moutons> 
+
+3.
+<paragraphes>{
+  
+  for $p in //paragr
+  return(
+    <type>
+    {data($p/@type)}
+    </type>,
+  <nbphrases>
+  {data(count($p/phrase))}
+  </nbphrases>,
+  <modalites>
+  {distinct-values ($p/phrase/@modalite)}
+  </modalites>,
+  <locuteurs>
+  {distinct-values ($p/phrase/@locuteur)}
+  </locuteurs>
+)
+}</paragraphes>
+
+4.
+<francais>{
+  for $p in //paragr
+  return(
+    <paragraphe>
+    {$p/phrase[@langue='fr']}
+    </paragraphe>
+  )
+}</francais>
+
+5.
+<francais2>{
+  for $p in //paragr
+  return(
+    <paragraphe>
+    {$p/phrase[@langue='fr'][2]}
+    </paragraphe>
+  )
+}</francais2>
+
+6.
+<dialfr>{
+  for $p in //paragr
+  where $p/@type='dialogue' and count($p/phrase[@langue='fr' and @locuteur='Narrateur'])>0
+  return(
+    <paragraphe>
+    {$p/phrase[@langue='fr' and @locuteur='Narrateur']}
+    </paragraphe>
+  )
+}</dialfr>
+
+7.
+<princefr>{
+  let $x := count(//paragr/phrase[@langue='fr' and @locuteur='LePetitPrince' and contains(., 'mouton')])
+  return(
+    <phrases>
+    {//paragr/phrase[@langue='fr' and @locuteur='LePetitPrince' and contains(., 'mouton')]}
+    </phrases>,
+    <nbphrases>
+    {
+      $x
+  }
+    </nbphrases>
+  )
+}</princefr>
+
