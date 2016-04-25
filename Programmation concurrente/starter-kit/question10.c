@@ -68,36 +68,58 @@ static decomposition find(int nb, int debut, int fin)
 		return EMPTYDEC;
 	}
 	
-	if ((fin - debut) == 0)	//ARRET
+	if ((fin - debut) == 1 || (fin-debut) == 0)	//ARRET Changé de 0 à 1
 	{
 		if(tab_facteurs[debut].nombre == nb)
 		{
 			return tab_facteurs[debut];
 		}
-		else
+		else if(tab_facteurs[fin].nombre == nb) //test de la fin
+        {
+            return tab_facteurs[fin];
+        }
+        else
 		{
 			return EMPTYDEC;
 		}
 	}
 	
-	int milieu = (fin - debut)/2;
+	int milieu = debut + ((fin - debut)/2); //changed
 	if(tab_facteurs[milieu].nombre <= nb)
 	{
 		return find(nb, milieu, fin);	//TODO : BOUCLE 0 1
 	}
 	else
-	{
+	{s
 		return find(nb, debut, milieu);
 	}
 	
 	return EMPTYDEC;
+    
+    /*Là si le bon nombr eets pile sur milieu on re-boucle quand meme non? ou pas grave? le find marche par apire, mais pas plus. 
+     * Probleme stockage des trucs trouvés? Problème pour les trouver? Proble de realloc? Mettre mutex ? 
+     * 
+     if(tab_facteurs[milieu].nombre < nb)
+	{
+		return find(nb, milieu, fin);	//TODO : BOUCLE 0 1
+	}
+	else if(tab_facteurs[milieu].nombre > nb)
+	{
+		return find(nb, debut, milieu);
+	}
+    else 
+    {
+        return tab_facteurs[milieu];
+    }
+     * */
 }
 
-static void insert (decomposition dec)
+static void insert (decomposition dec) //mutex sur insertion!
 {
 	taille_tab++;
 	tab_facteurs = realloc (tab_facteurs, taille_tab * sizeof(decomposition));
 	tab_facteurs[taille_tab-1] = dec;
+    quickSort(tab_facteurs,0,taille_tab-1); //trier dès qu'on insert, non? On l'appelait jamais...
 }
 
 
