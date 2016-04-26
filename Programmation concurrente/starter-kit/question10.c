@@ -12,6 +12,7 @@ typedef struct {
 } decomposition ;
 
 static pthread_mutex_t mutex;
+static pthread_mutex_t mutex_insert;
 static pthread_mutex_t mutex_print;
 static uint64_t MAX_FACTORS = 30;
 static int taille_tab;
@@ -68,13 +69,13 @@ static decomposition find(int nb, int debut, int fin)
 		return EMPTYDEC;
 	}
 	
-	if ((fin - debut) == 1 || (fin-debut) == 0)	//ARRET Changé de 0 à 1
+	if (fin - debut <= 1)	//ARRET Changé de 0 à 1
 	{
 		if(tab_facteurs[debut].nombre == nb)
 		{
 			return tab_facteurs[debut];
 		}
-		else if(tab_facteurs[fin].nombre == nb) //test de la fin
+		else if(tab_facteurs[fin].nombre == nb) //test de la fin (normalement inutile)
         {
             return tab_facteurs[fin];
         }
@@ -84,13 +85,13 @@ static decomposition find(int nb, int debut, int fin)
 		}
 	}
 	
-	int milieu = debut + ((fin - debut)/2); //changed
+	int milieu = (fin + debut)/2;
 	if(tab_facteurs[milieu].nombre <= nb)
 	{
-		return find(nb, milieu, fin);	//TODO : BOUCLE 0 1
+		return find(nb, milieu, fin);
 	}
 	else
-	{s
+	{
 		return find(nb, debut, milieu);
 	}
 	
@@ -116,10 +117,12 @@ static decomposition find(int nb, int debut, int fin)
 
 static void insert (decomposition dec) //mutex sur insertion!
 {
+	pthread_mutex_lock(&mutex_insert);
 	taille_tab++;
 	tab_facteurs = realloc (tab_facteurs, taille_tab * sizeof(decomposition));
 	tab_facteurs[taille_tab-1] = dec;
-    quickSort(tab_facteurs,0,taille_tab-1); //trier dès qu'on insert, non? On l'appelait jamais...
+    quickSort(tab_facteurs,0,taille_tab-1);
+	pthread_mutex_unlock(&mutex_insert);
 }
 
 
@@ -136,7 +139,7 @@ int get_prime_factors(uint64_t n,uint64_t* dest)
 		}
 		return  dec.nbFacteurs;
 	}
-
+	/*NON-TROUVE*/
 	uint64_t i;
 	int j = 0;
 	i = 2;
@@ -168,6 +171,54 @@ int get_prime_factors(uint64_t n,uint64_t* dest)
 	
 	return j;
 }
+
+int get_prime_factors_mem(uint64_t n, uint64_t* dest, uint64_t nbDiviseursTrouves)
+{
+	decomposition dec;
+	if ((dec = find(n, 0, taille_tab - 1)).nombre != -1)	//TROUVE
+	{
+		int k;
+		for (k = 0; k<(dec.nbFacteurs); k++)
+		{
+			dest[k + nbDiviseursTrouves] = dec.facteurs[k];
+		}
+		return  dec.nbFacteurs + nbDiviseursTrouves;
+	}
+
+	/*NON-TROUVE*/
+	uint64_t i;
+	i = 2;
+
+	while (n%i != 0)
+	{
+		i++;
+	}
+	
+	dest[nbDiviseursTrouves++] = i;
+	uint64_t *temp = malloc(nbDiviseursTrouves * sizeof(uint64_t));
+	int k;
+
+	for (k = 0; k<nbDiviseursTrouves; k++)
+	{
+		temp[k] = dest[k];
+	}
+
+	dec.nombre = n;
+	dec.nbFacteurs = nbDiviseursTrouves;
+	dec.facteurs = temp;
+	insert(dec);
+
+	if (n == i) //nombre premier, decomposition terminee
+	{
+		return nbDiviseursTrouves;
+	}
+	else
+	{
+		return get_prime_factors_mem(n / i, dest, nbDiviseursTrouves);
+	}
+	return 0;
+}
+
 void print_prime_factors(uint64_t n)
 {
     uint64_t factors[MAX_FACTORS];
@@ -222,6 +273,7 @@ int main(void)
 	
 	pthread_mutex_init(&mutex, NULL);
 	pthread_mutex_init(&mutex_print, NULL);
+	pthread_mutex_init(&mutex_insert, NULL);
 	
 	pthread_create(&thread1, NULL, routine, fichier);
 	pthread_create(&thread2, NULL, routine, fichier);
@@ -231,6 +283,7 @@ int main(void)
 	
 	pthread_mutex_destroy(&mutex);
 	pthread_mutex_destroy(&mutex_print);
+	pthread_mutex_destroy(&mutex_insert);
 	
 	fclose(fichier);
     
