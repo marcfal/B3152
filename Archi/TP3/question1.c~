@@ -1,0 +1,18 @@
+#define N 100
+
+#include <inttypes.h>
+
+double v[N];
+double A[N][N];
+double B[N][N];
+double C[N][N];
+
+int main(){
+	uint64_t i;
+	double sum;
+	for(i=0; i<N; i++)
+	{
+		sum += v[i];
+	}
+return 0;
+}
