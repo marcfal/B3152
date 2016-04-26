@@ -1,0 +1,152 @@
+B3152	FALLOUH Marc	KANCEL Justin
+
+----------------------------------------------1----------------------------------------------------
+
+Xpath :
+1    Les auteurs de la mise en forme :
+auteur	FALLOUH
+auteur	KANCEL
+
+
+2    Les paragraphes de narration
+paragr	[1]
+paragr	[2]
+paragr	[4]
+...
+paragr	[25]
+
+
+3    Les phrases en français
+phrase	J'ai ainsi vécu seul, sans personne avec qui parler véritablement, jusqu'à une panne dans le désert du Sahara, il y a six ans. 
+phrase	Quelque chose s'était cassé dans mon moteur, et comme je n'avais avec moi ni mécanicien, ni passagers, je me préparai à essayer de réussir, tout seul, une réparation difficile. 
+...
+phrase	Et c'est ainsi que je fis la connaissance du petit prince. 
+
+
+4    La troisième phrase de chaque paragraphe
+phrase	C'était pour moi une question de vie ou de mort. J'avais à peine de l'eau à boire pour huit jours. 
+phrase	Alors vous imaginez ma surprise, au levé du jour, quand une drôle de petite voix m'a réveillé. 
+...
+phrase	Tiens! Il s'est endormi... 
+
+
+5    La neuvième phrase du texte (pensez à utiliser les parenthèses)
+phrase	J'étais bien plus isolé qu'un naufragé sur un rideau au milieu de l'océan. 
+
+
+6    Les phrases commençant par "Je"
+phrase	Je regardai donc cette apparition avec des yeux tout ronds d'étonnement. 
+phrase	Je dessinai: 
+phrase	Je refis donc encore mon dessin: 
+phrase	Je veux un mouton qui vive longtemps. 
+phrase	Je t'ai donné un tout petit mouton. 
+
+
+7    Listez les types des paragraphes du texte (sans doublons)
+type	narration				
+type	dialogue
+
+
+---------------------------------------------2----------------------------------------------------
+1.
+<phrases>
+   <phrase locuteur="Narrateur" modalite="declarative" langue="fr"> Il me répondit: </phrase>
+   <phrase locuteur="Narrateur" modalite="declarative" langue="fr">Alors j'ai dessiné. </phrase>
+   ...
+</phrases>
+
+
+2.
+<moutons>
+   <phrase locuteur="LePetitPrince" modalite="impérative" langue="fr">Ca ne fait rien. Dessine-moi un mouton. </phrase>
+   <phrase locuteur="Narrateur" modalite="declarative" langue="fr">Comme je n'avais jamais dessiné un mouton je refis, pour lui, un des deux seuls dessins dont j'étais capable. </phrase>
+   <phrase locuteur="LePetitPrince" modalite="interrogative" langue="fr">Crois-tu qu'il faille beaucoup d'herbe à ce mouton? </phrase>
+   <phrase locuteur="LePetitPrince" modalite="impérative" langue="fr">Dessine-moi un mouton. </phrase>
+   <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">Dessine-moi un mouton... </phrase>
+   <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">J'ai besoin d'un mouton. </phrase>
+   <phrase locuteur="Narrateur" modalite="declarative" langue="fr">Je t'ai donné un tout petit mouton. </phrase>
+   <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">Je veux un mouton qui vive longtemps. </phrase>
+   <phrase locuteur="Narrateur" modalite="declarative" langue="fr">Le mouton que tu veux est dedans. </phrase>
+   <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">S'il vous plaît... dessine-moi un mouton! </phrase>
+   <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">S'il vous plaît... dessine-moi un mouton... </phrase>
+   <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">Tu vois bien... ce n'est pas un mouton, c'est un bélier. </phrase>
+</moutons>
+
+
+3.
+<paragraphes>
+   <type>narration</type>
+   <nbphrases>7</nbphrases>
+   <modalites>declarative</modalites>
+   <locuteurs>Narrateur</locuteurs>
+   <type>narration</type>
+   <nbphrases>7</nbphrases>
+   <modalites>declarative</modalites>
+   <locuteurs>Narrateur</locuteurs>
+   <type>dialogue</type>
+   <nbphrases>6</nbphrases>
+   <modalites>declarative exclamative</modalites>
+   <locuteurs>LePetitPrince Narrateur</locuteurs>
+   ...
+</paragraphes>
+
+
+4.
+<francais>
+   <paragraphe>
+      <phrase locuteur="Narrateur" modalite="declarative" langue="fr">J'ai ainsi vécu seul, sans personne avec qui parler véritablement, jusqu'à une panne dans le désert du Sahara, il y a six ans. </phrase>
+      <phrase locuteur="Narrateur" modalite="declarative" langue="fr">Quelque chose s'était cassé dans mon moteur, et comme je n'avais avec moi ni mécanicien, ni passagers, je me préparai à essayer de réussir, tout seul, une réparation difficile. </phrase>
+      <phrase locuteur="Narrateur" modalite="declarative" langue="fr">C'était pour moi une question de vie ou de mort. J'avais à peine de l'eau à boire pour huit jours. </phrase>
+   </paragraphe>
+   ...
+</francais>
+
+
+5.
+<francais2>
+   <paragraphe>
+      <phrase locuteur="Narrateur" modalite="declarative" langue="fr">Quelque chose s'était cassé dans mon moteur, et comme je n'avais avec moi ni mécanicien, ni passagers, je me préparai à essayer de réussir, tout seul, une réparation difficile. </phrase>
+   </paragraphe>
+   <paragraphe>
+      <phrase locuteur="Narrateur" modalite="declarative" langue="fr">J'étais bien plus isolé qu'un naufragé sur un rideau au milieu de l'océan. </phrase>
+   </paragraphe>
+   ...
+</francais2>
+
+
+6.
+<dialfr>
+   <paragraphe>
+      <phrase locuteur="Narrateur" modalite="exclamative" langue="fr">Hein! </phrase>
+   </paragraphe>
+   <paragraphe>
+      <phrase locuteur="Narrateur" modalite="interrogative" langue="fr">Mais qu'est-ce que tu fais là? </phrase>
+   </paragraphe>
+   <paragraphe>
+      <phrase locuteur="Narrateur" modalite="declarative" langue="fr">Ca c'est la caisse. </phrase>
+      <phrase locuteur="Narrateur" modalite="declarative" langue="fr">Le mouton que tu veux est dedans. </phrase>
+   </paragraphe>
+   <paragraphe>
+      <phrase locuteur="Narrateur" modalite="interrogative" langue="fr">Pourquoi? </phrase>
+      <phrase locuteur="Narrateur" modalite="declarative" langue="fr">Ca suffira sûrement. </phrase>
+      <phrase locuteur="Narrateur" modalite="declarative" langue="fr">Je t'ai donné un tout petit mouton. </phrase>
+   </paragraphe>
+</dialfr>
+
+
+7.
+<princefr>
+   <phrases>
+      <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">S'il vous plaît... dessine-moi un mouton! </phrase>
+      <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">Dessine-moi un mouton... </phrase>
+      <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">S'il vous plaît... dessine-moi un mouton... </phrase>
+      <phrase locuteur="LePetitPrince" modalite="impérative" langue="fr">Ca ne fait rien. Dessine-moi un mouton. </phrase>
+      <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">J'ai besoin d'un mouton. </phrase>
+      <phrase locuteur="LePetitPrince" modalite="impérative" langue="fr">Dessine-moi un mouton. </phrase>
+      <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">Tu vois bien... ce n'est pas un mouton, c'est un bélier. </phrase>
+      <phrase locuteur="LePetitPrince" modalite="declarative" langue="fr">Je veux un mouton qui vive longtemps. </phrase>
+      <phrase locuteur="LePetitPrince" modalite="interrogative" langue="fr">Crois-tu qu'il faille beaucoup d'herbe à ce mouton? </phrase>
+   </phrases>
+   <nbphrases>9</nbphrases>
+</princefr>
+
