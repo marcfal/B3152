@@ -1,0 +1,108 @@
+B3152	FALLOUH Marc	KANCEL Justin
+
+----------------------------------------------1----------------------------------------------------
+
+Erreurs :
+Champ email manquant dans <infos>
+Correction date et binome
+
+Xpath :
+1    Les auteurs de la mise en forme :
+//mise_en_forme_par/auteur
+2    Les paragraphes de narration
+//paragr[@type='narration']
+3    Les phrases en français
+//phrase[@langue='fr']
+4    La troisième phrase de chaque paragraphe
+//paragr/phrase[3]
+5    La neuvième phrase du texte (pensez à utiliser les parenthèses)
+(//phrase)[9]
+6    Les phrases commençant par "Je"
+//phrase[starts-with(text(), 'Je')]
+7    Listez les types des paragraphes du texte (sans doublons)
+distinct-values(//paragr/@type)											/*xpath 2.0*/
+//paragr[not(@type= preceding::paragr/@type)]/@type						/*xpath 1.0*/
+
+
+
+---------------------------------------------2----------------------------------------------------
+1. Retournez les phrases en français triés en ordre alphabétique
+<phrases>{
+for $p in //phrase[@langue='fr']
+order by $p
+return $p
+}</phrases> 
+
+2. Retournez les phrases françaises contenant le mot "mouton"
+<moutons>{
+for $p in //phrase[@langue='fr']
+where contains($p, 'mouton')
+return $p
+}</moutons> 
+
+3. Pour chaque paragraphe: donnez son type, le nombre de phrases qui la compose, les modalités de ces phrases (sans répétition) ainsi que les locuteurs.
+<paragraphes>{
+  
+  for $p in //paragr
+  return(
+    <type>
+    {data($p/@type)}
+    </type>,
+  <nbphrases>
+  {data(count($p/phrase))}
+  </nbphrases>,
+  <modalites>
+  {distinct-values ($p/phrase/@modalite)}
+  </modalites>,
+  <locuteurs>
+  {distinct-values ($p/phrase/@locuteur)}
+  </locuteurs>
+)
+}</paragraphes>
+
+4. Afficher la version française seulement (respectez la structure en paragraphes)
+<francais>{
+  for $p in //paragr
+  return(
+    <paragraphe>
+    {$p/phrase[@langue='fr']}
+    </paragraphe>
+  )
+}</francais>
+
+5. Afficher uniquement les deuxièmes phrases des paragraphes de la version française
+<francais2>{
+  for $p in //paragr
+  return(
+    <paragraphe>
+    {$p/phrase[@langue='fr'][2]}
+    </paragraphe>
+  )
+}</francais2>
+
+6. Afficher seulement les dialogues en français du narrateur
+<dialfr>{
+  for $p in //paragr
+  where $p/@type='dialogue' and count($p/phrase[@langue='fr' and @locuteur='Narrateur'])>0
+  return(
+    <paragraphe>
+    {$p/phrase[@langue='fr' and @locuteur='Narrateur']}
+    </paragraphe>
+  )
+}</dialfr>
+
+7. Afficher toutes les phrases du Petit Prince en français qui comporte le mot "mouton" ainsi que le nombre de ces phrases
+<princefr>{
+  let $x := count(//paragr/phrase[@langue='fr' and @locuteur='LePetitPrince' and contains(., 'mouton')])
+  return(
+    <phrases>
+    {//paragr/phrase[@langue='fr' and @locuteur='LePetitPrince' and contains(., 'mouton')]}
+    </phrases>,
+    <nbphrases>
+    {
+      $x
+  }
+    </nbphrases>
+  )
+}</princefr>
+
