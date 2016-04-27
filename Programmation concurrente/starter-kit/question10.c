@@ -266,7 +266,7 @@ int main(void)
 
 	taille_tab = 1;
 	
-    FILE * fichier = fopen("illustr_mutex.txt", "r");
+    FILE * fichier = fopen("tricky.txt", "r");
     
     pthread_t thread1;
 	pthread_t thread2;
