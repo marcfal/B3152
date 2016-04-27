@@ -172,7 +172,7 @@ int get_prime_factors(uint64_t n,uint64_t* dest)
 	return j;
 }
 
-int get_prime_factors_mem(uint64_t n, uint64_t* dest, uint64_t nbDiviseursTrouves)
+int get_prime_factors_mem(uint64_t n, uint64_t* dest, uint64_t nbDiviseursTrouves, uint64_t dernierDiv)
 {
 	decomposition dec;
 	if ((dec = find(n, 0, taille_tab - 1)).nombre != -1)	//TROUVE
@@ -187,7 +187,7 @@ int get_prime_factors_mem(uint64_t n, uint64_t* dest, uint64_t nbDiviseursTrouve
 
 	/*NON-TROUVE*/
 	uint64_t i;
-	i = 2;
+	i = dernierDiv;
 
 	while (n%i != 0)
 	{
@@ -214,7 +214,7 @@ int get_prime_factors_mem(uint64_t n, uint64_t* dest, uint64_t nbDiviseursTrouve
 	}
 	else
 	{
-		return get_prime_factors_mem(n / i, dest, nbDiviseursTrouves);
+		return get_prime_factors_mem(n / i, dest, nbDiviseursTrouves, i);
 	}
 	return 0;
 }
@@ -223,7 +223,7 @@ void print_prime_factors(uint64_t n)
 {
     uint64_t factors[MAX_FACTORS];
 	int j,k;
-	k=get_prime_factors(n,factors);
+	k=get_prime_factors_mem(n,factors, 0, 2);
 	
 	pthread_mutex_lock(&mutex_print);
 	printf("%ju: ",n);
@@ -266,10 +266,12 @@ int main(void)
 
 	taille_tab = 1;
 	
-    FILE * fichier = fopen("illustr_mutex.txt", "r");
+        FILE * fichier = fopen("exemple.txt", "r");
     
-    pthread_t thread1;
+        pthread_t thread1;
 	pthread_t thread2;
+        pthread_t thread3;
+        pthread_t thread4;
 	
 	pthread_mutex_init(&mutex, NULL);
 	pthread_mutex_init(&mutex_print, NULL);
@@ -277,8 +279,12 @@ int main(void)
 	
 	pthread_create(&thread1, NULL, routine, fichier);
 	pthread_create(&thread2, NULL, routine, fichier);
+        pthread_create(&thread3, NULL, routine, fichier);
+        pthread_create(&thread4, NULL, routine, fichier);
 
-	pthread_join(thread2, NULL);
+	pthread_join(thread4, NULL);
+        pthread_join(thread3, NULL);
+        pthread_join(thread2, NULL);
 	pthread_join(thread1, NULL);
 	
 	pthread_mutex_destroy(&mutex);
