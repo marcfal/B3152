@@ -47,7 +47,7 @@ void *routine(void *arg)
 
 int main(void)
 {
-    FILE * fichier = fopen("illustr_mutex.txt", "r");
+    FILE * fichier = fopen("question5gain.txt", "r");
     
     pthread_t thread1;
 	pthread_t thread2;

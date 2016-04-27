@@ -34,12 +34,12 @@ int main(void)
     */
     
     
-    FILE * fichier = fopen("test.txt", "r");
+    FILE * fichier = fopen("question2.txt", "r");
     
-    char ligne [30];
+    char ligne [50];
     uint64_t nb;
     
-    while(fgets(ligne, 30, fichier) != NULL)
+    while(fgets(ligne, 50, fichier) != NULL)
     {
 		nb = (uint64_t)atoll(ligne);
 		printf("%ju: ", nb);
