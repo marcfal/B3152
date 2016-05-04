@@ -64,7 +64,6 @@ void lcd_display_digit(int pos, int digit)
 {
 	unsigned char* octet = (unsigned char*)(pos + 146);
 	int bits;
-	bits = 0;
 	if (digit == 0)
 	{
 		bits = 95;

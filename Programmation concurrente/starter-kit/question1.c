@@ -96,8 +96,8 @@ int prime_list(uint64_t n, uint64_t *tab)
 	
 	return taille_tab;
 }
-*/
 
+*/
 int main(void)
 {
     print_prime_factors(77); // expected result:   77: 7 11

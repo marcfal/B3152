@@ -64,6 +64,7 @@ void lcd_display_digit(int pos, int digit)
 {
 	unsigned char* octet = (unsigned char*)(pos + 146);
 	int bits;
+	bits = 0;
 	if (digit == 0)
 	{
 		bits = 95;
@@ -111,7 +112,6 @@ void lcd_display_digit(int pos, int digit)
 
 void lcd_display_number(unsigned int n)
 {
-	unsigned int div = (unsigned int)1000000;
 	int j;
 	for(j=1; j<8; j++)
 	{
