@@ -1,0 +1,199 @@
+
+tp4.elf:     file format elf32-msp430
+
+
+Disassembly of section .text:
+
+00003100 <__watchdog_support>:
+    3100:	b2 40 80 5a 	mov	#23168,	&0x0120	;#0x5a80
+    3104:	20 01 
+
+00003106 <__init_stack>:
+    3106:	31 40 00 31 	mov	#12544,	r1	;#0x3100
+
+0000310a <__do_copy_data>:
+    310a:	3f 40 00 00 	mov	#0,	r15	;#0x0000
+    310e:	0f 93       	tst	r15		
+    3110:	05 24       	jz	$+12     	;abs 0x311c
+    3112:	2f 83       	decd	r15		
+    3114:	9f 4f b2 32 	mov	12978(r15),4352(r15);0x32b2(r15), 0x1100(r15)
+    3118:	00 11 
+    311a:	fb 23       	jnz	$-8      	;abs 0x3112
+
+0000311c <__do_clear_bss>:
+    311c:	3f 40 02 00 	mov	#2,	r15	;#0x0002
+    3120:	0f 93       	tst	r15		
+    3122:	04 24       	jz	$+10     	;abs 0x312c
+    3124:	1f 83       	dec	r15		
+    3126:	cf 43 00 11 	mov.b	#0,	4352(r15);r3 As==00, 0x1100(r15)
+    312a:	fc 23       	jnz	$-6      	;abs 0x3124
+
+0000312c <main>:
+    312c:	21 83       	decd	r1		
+    312e:	32 d2       	eint			
+    3130:	b0 12 94 31 	call	#0x3194	
+    3134:	5f 42 32 00 	mov.b	&0x0032,r15	
+    3138:	6f d3       	bis.b	#2,	r15	;r3 As==10
+    313a:	c2 4f 32 00 	mov.b	r15,	&0x0032	
+    313e:	82 43 00 11 	mov	#0,	&0x1100	;r3 As==00
+    3142:	b2 40 f6 28 	mov	#10486,	&0x0172	;#0x28f6
+    3146:	72 01 
+    3148:	b2 40 10 02 	mov	#528,	&0x0160	;#0x0210
+    314c:	60 01 
+    314e:	b2 40 10 00 	mov	#16,	&0x0162	;#0x0010
+    3152:	62 01 
+    3154:	81 43 00 00 	mov	#0,	0(r1)	;r3 As==00, 0x0000(r1)
+    3158:	2f 41       	mov	@r1,	r15	
+    315a:	3f 90 f0 ff 	cmp	#-16,	r15	;#0xfff0
+    315e:	08 2c       	jc	$+18     	;abs 0x3170
+    3160:	2f 41       	mov	@r1,	r15	
+    3162:	1f 53       	inc	r15		
+    3164:	81 4f 00 00 	mov	r15,	0(r1)	;0x0000(r1)
+    3168:	2f 41       	mov	@r1,	r15	
+    316a:	3f 90 f0 ff 	cmp	#-16,	r15	;#0xfff0
+    316e:	f8 2b       	jnc	$-14     	;abs 0x3160
+    3170:	5f 42 31 00 	mov.b	&0x0031,r15	
+    3174:	6f e3       	xor.b	#2,	r15	;r3 As==10
+    3176:	c2 4f 31 00 	mov.b	r15,	&0x0031	
+    317a:	ec 3f       	jmp	$-38     	;abs 0x3154
+
+0000317c <__stop_progExec__>:
+    317c:	32 d0 f0 00 	bis	#240,	r2	;#0x00f0
+    3180:	fd 3f       	jmp	$-4      	;abs 0x317c
+
+00003182 <__ctors_end>:
+    3182:	30 40 b0 32 	br	#0x32b0	
+
+00003186 <mon_traitant_interruption_timer>:
+    3186:	1f 42 00 11 	mov	&0x1100,r15	
+    318a:	b0 12 5c 32 	call	#0x325c	
+    318e:	92 53 00 11 	inc	&0x1100	
+    3192:	30 41       	ret			
+
+00003194 <lcd_init>:
+    3194:	5f 42 32 00 	mov.b	&0x0032,r15	
+    3198:	7f d0 1c 00 	bis.b	#28,	r15	;#0x001c
+    319c:	c2 4f 32 00 	mov.b	r15,	&0x0032	
+    31a0:	5f 42 33 00 	mov.b	&0x0033,r15	
+    31a4:	7f d0 1c 00 	bis.b	#28,	r15	;#0x001c
+    31a8:	c2 4f 33 00 	mov.b	r15,	&0x0033	
+    31ac:	f2 40 1d 00 	mov.b	#29,	&0x0090	;#0x001d
+    31b0:	90 00 
+    31b2:	f2 40 7e 00 	mov.b	#126,	&0x00ac	;#0x007e
+    31b6:	ac 00 
+    31b8:	c2 43 ad 00 	mov.b	#0,	&0x00ad	;r3 As==00
+    31bc:	30 41       	ret			
+
+000031be <lcd_clear>:
+    31be:	3f 40 91 00 	mov	#145,	r15	;#0x0091
+    31c2:	cf 43 00 00 	mov.b	#0,	0(r15)	;r3 As==00, 0x0000(r15)
+    31c6:	1f 53       	inc	r15		
+    31c8:	3f 90 a5 00 	cmp	#165,	r15	;#0x00a5
+    31cc:	fa 23       	jnz	$-10     	;abs 0x31c2
+    31ce:	30 41       	ret			
+
+000031d0 <lcd_fill>:
+    31d0:	3f 40 91 00 	mov	#145,	r15	;#0x0091
+    31d4:	ff 43 00 00 	mov.b	#-1,	0(r15)	;r3 As==11, 0x0000(r15)
+    31d8:	1f 53       	inc	r15		
+    31da:	3f 90 a5 00 	cmp	#165,	r15	;#0x00a5
+    31de:	fa 23       	jnz	$-10     	;abs 0x31d4
+    31e0:	30 41       	ret			
+
+000031e2 <lcd_display_digit>:
+    31e2:	3f 50 92 00 	add	#146,	r15	;#0x0092
+    31e6:	0e 93       	tst	r14		
+    31e8:	19 24       	jz	$+52     	;abs 0x321c
+    31ea:	1e 93       	cmp	#1,	r14	;r3 As==01
+    31ec:	1a 24       	jz	$+54     	;abs 0x3222
+    31ee:	2e 93       	cmp	#2,	r14	;r3 As==10
+    31f0:	1b 24       	jz	$+56     	;abs 0x3228
+    31f2:	3e 90 03 00 	cmp	#3,	r14	;#0x0003
+    31f6:	1b 24       	jz	$+56     	;abs 0x322e
+    31f8:	2e 92       	cmp	#4,	r14	;r2 As==10
+    31fa:	1c 24       	jz	$+58     	;abs 0x3234
+    31fc:	3e 90 05 00 	cmp	#5,	r14	;#0x0005
+    3200:	1c 24       	jz	$+58     	;abs 0x323a
+    3202:	3e 90 06 00 	cmp	#6,	r14	;#0x0006
+    3206:	1c 24       	jz	$+58     	;abs 0x3240
+    3208:	3e 90 07 00 	cmp	#7,	r14	;#0x0007
+    320c:	1c 24       	jz	$+58     	;abs 0x3246
+    320e:	3e 92       	cmp	#8,	r14	;r2 As==11
+    3210:	1d 24       	jz	$+60     	;abs 0x324c
+    3212:	3e 90 09 00 	cmp	#9,	r14	;#0x0009
+    3216:	1d 24       	jz	$+60     	;abs 0x3252
+    3218:	0e 43       	clr	r14		
+    321a:	1d 3c       	jmp	$+60     	;abs 0x3256
+    321c:	3e 40 5f 00 	mov	#95,	r14	;#0x005f
+    3220:	1a 3c       	jmp	$+54     	;abs 0x3256
+    3222:	3e 40 06 00 	mov	#6,	r14	;#0x0006
+    3226:	17 3c       	jmp	$+48     	;abs 0x3256
+    3228:	3e 40 6b 00 	mov	#107,	r14	;#0x006b
+    322c:	14 3c       	jmp	$+42     	;abs 0x3256
+    322e:	3e 40 2f 00 	mov	#47,	r14	;#0x002f
+    3232:	11 3c       	jmp	$+36     	;abs 0x3256
+    3234:	3e 40 36 00 	mov	#54,	r14	;#0x0036
+    3238:	0e 3c       	jmp	$+30     	;abs 0x3256
+    323a:	3e 40 3d 00 	mov	#61,	r14	;#0x003d
+    323e:	0b 3c       	jmp	$+24     	;abs 0x3256
+    3240:	3e 40 7d 00 	mov	#125,	r14	;#0x007d
+    3244:	08 3c       	jmp	$+18     	;abs 0x3256
+    3246:	3e 40 07 00 	mov	#7,	r14	;#0x0007
+    324a:	05 3c       	jmp	$+12     	;abs 0x3256
+    324c:	3e 40 7f 00 	mov	#127,	r14	;#0x007f
+    3250:	02 3c       	jmp	$+6      	;abs 0x3256
+    3252:	3e 40 3f 00 	mov	#63,	r14	;#0x003f
+    3256:	cf 4e 00 00 	mov.b	r14,	0(r15)	;0x0000(r15)
+    325a:	30 41       	ret			
+
+0000325c <lcd_display_number>:
+    325c:	0b 12       	push	r11		
+    325e:	0a 12       	push	r10		
+    3260:	0b 4f       	mov	r15,	r11	
+    3262:	1a 43       	mov	#1,	r10	;r3 As==01
+    3264:	3e 40 0a 00 	mov	#10,	r14	;#0x000a
+    3268:	0f 4b       	mov	r11,	r15	
+    326a:	b0 12 a8 32 	call	#0x32a8	
+    326e:	0e 4f       	mov	r15,	r14	
+    3270:	0f 4a       	mov	r10,	r15	
+    3272:	b0 12 e2 31 	call	#0x31e2	
+    3276:	3e 40 0a 00 	mov	#10,	r14	;#0x000a
+    327a:	0f 4b       	mov	r11,	r15	
+    327c:	b0 12 8e 32 	call	#0x328e	
+    3280:	0b 4f       	mov	r15,	r11	
+    3282:	1a 53       	inc	r10		
+    3284:	3a 92       	cmp	#8,	r10	;r2 As==11
+    3286:	ee 23       	jnz	$-34     	;abs 0x3264
+    3288:	3a 41       	pop	r10		
+    328a:	3b 41       	pop	r11		
+    328c:	30 41       	ret			
+
+0000328e <__udivhi3>:
+    328e:	7c 40 10 00 	mov.b	#16,	r12	;#0x0010
+    3292:	0d 4e       	mov	r14,	r13	
+    3294:	0e 43       	clr	r14		
+    3296:	0f 5f       	rla	r15		
+    3298:	0e 6e       	rlc	r14		
+    329a:	0e 9d       	cmp	r13,	r14	
+    329c:	02 28       	jnc	$+6      	;abs 0x32a2
+    329e:	0e 8d       	sub	r13,	r14	
+    32a0:	1f d3       	bis	#1,	r15	;r3 As==01
+    32a2:	1c 83       	dec	r12		
+    32a4:	f8 23       	jnz	$-14     	;abs 0x3296
+    32a6:	30 41       	ret			
+
+000032a8 <__umodhi3>:
+    32a8:	b0 12 8e 32 	call	#0x328e	
+    32ac:	0f 4e       	mov	r14,	r15	
+    32ae:	30 41       	ret			
+
+000032b0 <_unexpected_>:
+    32b0:	00 13       	reti			
+
+Disassembly of section .vectors:
+
+0000ffc0 <__ivtbl_32>:
+    ffc0:	82 31 82 31 82 31 82 31 82 31 82 31 82 31 82 31     .1.1.1.1.1.1.1.1
+    ffd0:	82 31 82 31 82 31 82 31 82 31 82 31 82 31 82 31     .1.1.1.1.1.1.1.1
+    ffe0:	82 31 82 31 82 31 82 31 82 31 82 31 82 31 82 31     .1.1.1.1.1.1.1.1
+    fff0:	82 31 82 31 82 31 82 31 82 31 82 31 82 31 00 31     .1.1.1.1.1.1.1.1
