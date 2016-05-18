@@ -1,0 +1,57 @@
+2016-05-18 17:20:31 INFO  main [mitsuba.cpp:256] Mitsuba version 0.5.0 (Windows, 64 bit), Copyright (c) 2014 Wenzel Jakob
+2016-05-18 17:20:31 INFO  main [mitsuba.cpp:356] Parsing scene description from "texture-lookat.xml" ..
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\path.dll" ..
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\constant.dll" ..
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\bitmap.dll" ..
+2016-05-18 17:20:31 INFO  main [BitmapTexture] Loading texture "lisse.png"
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\lanczos.dll" ..
+2016-05-18 17:20:31 INFO  main [BitmapTexture] Loading texture "niveaux.png"
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\diffuse.dll" ..
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\twosided.dll" ..
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\heightfield.dll" ..
+2016-05-18 17:20:31 INFO  main [Heightfield] Resampling heightfield texture from 833x577 to 1025x1025 ..
+2016-05-18 17:20:31 INFO  main [Heightfield] Building acceleration data structure for 1025x1025 height field ..
+2016-05-18 17:20:31 INFO  main [Heightfield] Precomputing shading normals ..
+2016-05-18 17:20:31 INFO  main [Heightfield] Done (took 30 ms, uses 26.7 MiB of memory)
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\ldsampler.dll" ..
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\gaussian.dll" ..
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\ldrfilm.dll" ..
+2016-05-18 17:20:31 INFO  main [PluginManager] Loading plugin "plugins\perspective.dll" ..
+2016-05-18 17:20:31 INFO  ren0 [KDTreeBase] Constructing a SAH kd-tree (1 primitives) ..
+2016-05-18 17:20:31 INFO  ren0 [KDTreeBase] Finished -- took 0 ms.
+2016-05-18 17:20:31 INFO  ren0 [PluginManager] Loading plugin "plugins\sphere.dll" ..
+2016-05-18 17:20:31 INFO  ren0 [SamplingIntegrator] Starting render job (512x300, 32 samples, 4 cores, SSE2 enabled) ..
+2016-05-18 17:20:36 INFO  ren0 [RenderJob] Render time: 4.4850s
+2016-05-18 17:20:36 INFO  ren0 [LDRFilm] Writing image to "testrendu.png" ..
+2016-05-18 17:20:36 INFO  main [statistics.cpp:142] Statistics:
+------------------------------------------------------------
+ * Loaded plugins :
+    -  plugins\bitmap.dll [Bitmap texture]
+    -  plugins\constant.dll [Constant background emitter]
+    -  plugins\diffuse.dll [Smooth diffuse BRDF]
+    -  plugins\gaussian.dll [Gaussian reconstruction filter]
+    -  plugins\heightfield.dll [Height field intersection shape]
+    -  plugins\lanczos.dll [Lanczos Sinc filter]
+    -  plugins\ldrfilm.dll [Low dynamic range film]
+    -  plugins\ldsampler.dll [Low discrepancy sampler]
+    -  plugins\path.dll [MI path tracer]
+    -  plugins\perspective.dll [Perspective camera]
+    -  plugins\sphere.dll [Sphere intersection primitive]
+    -  plugins\twosided.dll [Two-sided BRDF adapter]
+
+  * General :
+    -  Normal rays traced : 7.426 M
+    -  Shadow rays traced : 2.533 M
+
+  * Height field :
+    -  Traversal operations per query : 19.90 (184.28 M / 9.26 M)
+
+  * Path tracer :
+    -  Average path length : 1.11 (5.44 M / 4.92 M)
+
+  * Texture system :
+    -  Average EWA samples / lookup : 1.77 (216.42 K / 122.54 K)
+    -  Cumulative MIP map memory allocations : 4.961 MiB
+    -  Filtered texture lookups : 80.49 % (2.72 M of 3.38 M)
+    -  Lookups with clamped anisotropy : 0.18 % (4.90 K of 2.72 M)
+------------------------------------------------------------
